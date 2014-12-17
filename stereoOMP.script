@@ -1,0 +1,10 @@
+#!/bin/bash
+#PBS -o ./stereo.out
+#PBS -e ./stereo.error
+#PBS -lnodes=1:ppn=16:compute,walltime=0:10:00
+cd $PBS_O_WORKDIR
+ulimit -s unlimited
+export OMP_WAIT_POLICY=ACTIVE
+export OMP_PROC_BIND=true
+icc -qopenmp -mkl stereo.cpp
+./a.out
