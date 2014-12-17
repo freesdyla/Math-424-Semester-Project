@@ -1,0 +1,8 @@
+#!/bin/bash
+#PBS -o ./stereoMPI.out
+#PBS -e ./stereoMPI.error
+#PBS -lnodes=8:ppn=16:compute,walltime=0:40:00
+cd $PBS_O_WORKDIR
+ulimit -s unlimited
+mpiicc -qopenmp -mkl stereo.cpp
+mpirun -perhost 16 -np 128 ./a.out
